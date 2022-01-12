@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using PluralsightDdd.SharedKernel.Interfaces;
 using Swashbuckle.AspNetCore.Annotations;
 using FrontDesk.Core.ScheduleAggregate;
+using PluralsightDdd.SharedKernel;
 
 namespace FrontDesk.Api.AppointmentEndpoints
 {
@@ -46,8 +47,8 @@ namespace FrontDesk.Api.AppointmentEndpoints
       var response = new UpdateAppointmentResponse(request.CorrelationId());
 
       var apptType = await _appointmentTypeRepository.GetByIdAsync(request.AppointmentTypeId);
-
-      var spec = new ScheduleByIdWithAppointmentsSpec(request.ScheduleId); // TODO: Just get that day's appointments
+      var currentDate = DateTimeOffsetRange.CreateOneDayRange(request.Start.DateTime);
+      var spec = new ScheduleByIdWithAppointmentsSpec(request.ScheduleId, currentDate);
       var schedule = await _scheduleReadRepository.GetBySpecAsync(spec);
 
       var apptToUpdate = schedule.Appointments

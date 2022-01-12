@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Ardalis.ApiEndpoints;
@@ -48,7 +47,8 @@ namespace FrontDesk.Api.AppointmentEndpoints
     {
       var response = new CreateAppointmentResponse(request.CorrelationId());
 
-      var spec = new ScheduleByIdWithAppointmentsSpec(request.ScheduleId); // TODO: Just get that day's appointments
+      var currentDate = DateTimeOffsetRange.CreateOneDayRange(request.DateOfAppointment.DateTime);
+      var spec = new ScheduleByIdWithAppointmentsSpec(request.ScheduleId, currentDate);
       var schedule = await _scheduleRepository.GetBySpecAsync(spec);
 
       var appointmentType = await _appointmentTypeReadRepository.GetByIdAsync(request.AppointmentTypeId);
