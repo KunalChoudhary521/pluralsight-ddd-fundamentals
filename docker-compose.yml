@@ -6,8 +6,10 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
-    ports: # uses 5672 internally
+    ports:
+      # uses 5672 internally
       - 15673:15672
+      - 5672:5672
 
   frontdesk-db:
     image: mcr.microsoft.com/mssql/server:2019-CU3-ubuntu-18.04
