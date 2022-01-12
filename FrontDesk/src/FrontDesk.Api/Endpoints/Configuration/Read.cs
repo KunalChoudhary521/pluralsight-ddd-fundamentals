@@ -23,7 +23,7 @@ namespace FrontDesk.Api.ConfigurationEndpoints
     ]
     public override async Task<ActionResult<string>> HandleAsync(CancellationToken cancellationToken)
     {
-      return Ok(new OfficeSettings().TestDate.ToString());
+      return Ok(new OfficeSettings().TestDate.ToString("yyyy-MM-ddTHH:mm:ss"));
     }
   }
 }

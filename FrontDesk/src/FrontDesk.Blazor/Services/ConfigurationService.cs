@@ -17,9 +17,8 @@ namespace FrontDesk.Blazor.Services
 
     public async Task<DateTime> ReadAsync()
     {
-      _logger.LogInformation("Read today date/time from configuration.");
-
-      return Convert.ToDateTime(await _httpService.HttpGetAsync($"api/configurations"));
+      var todayDate = await _httpService.HttpGetAsync($"api/configurations");
+      return DateTimeOffset.Parse(todayDate).DateTime;
     }
   }
 }
