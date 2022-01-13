@@ -57,6 +57,12 @@ namespace PluralsightDdd.SharedKernel
           this.End > dateTimeRange.Start;
     }
 
+    public bool Contains(DateTimeOffsetRange dateTimeRange)
+    {
+      return this.Start <= dateTimeRange.Start &&
+          this.End >= dateTimeRange.End;
+    }
+
     protected override IEnumerable<object> GetEqualityComponents()
     {
       yield return Start;

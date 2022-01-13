@@ -20,7 +20,7 @@ namespace FrontDesk.Core.ScheduleAggregate.Specifications
       Query
         .Where(schedule => schedule.Id == scheduleId)
         .Include(schedule => schedule.Appointments
-            .Where(app => app.TimeRange.Start >= dateTimeOffsetRange.Start && app.TimeRange.End <= dateTimeOffsetRange.End));
+            .Where(app => app.TimeRange.Start >= dateTimeOffsetRange.Start && app.TimeRange.End <= dateTimeOffsetRange.End));// TODO: replace with dateTimeOffsetRange.Contain(app.TimeRange)
 
     }
   }
